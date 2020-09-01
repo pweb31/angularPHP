@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>Système de gestion de categories</h1>
+  <form #f="ngForm">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <!-- <input type="text" name="nom" [(ngModel)]="selectedCategorie.nom"  class="form-control" id="nom" > -->
+      <input type="text" name="nom" [(ngModel)]="selectedCategorie.nom"  class="form-control" id="nom" >
+    </div>
+    <button type="button" class="btn btn-primary" (click)="createOrUpdateCategorie(f)">Create Categorie</button>
+  </form>
+  <br />
+  <div>
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Nom categorie </th>
+        <th>Operations</th>
+      </tr>
+      <tr *ngFor="let categorie of categories">
+        <td>{{ categorie.id }}</td>
+        <td>{{ categorie.nom }}</td>
+        <td>
+          <div class="row">
+            <div class="col-sm-12" style="display: flex; flex-direction: row;justify-content: center;align-items:center;">
+              <!-- <button type="button" (click)="open(mymodal);selectCategorie(categorie)" class="btn btn-secondary mr-2">Mettre à jour </button> -->
+              <button type="button" (click)="addUser(categorie);selectCategorie(categorie);" class="btn btn-secondary mr-2">Mettre à jour </button>
+              <button type="button" (click)="confirmBox(categorie.id)" class="btn btn-secondary ">Supprimer</button>
+            </div>
+          </div>
+          
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Mise à jour categorie</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #fa="ngForm">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" name="nom" [(ngModel)]="selectedCategorie.nom"  class="form-control" id="nom" >
+        </div>
+        <button type="button" class="btn btn-primary" (click)="createOrUpdateCategorie(fa)">Update Categorie</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+  </ng-template>
+  <!-- <button (click)="confirmBox()">Confirm Box</button> -->
+  <!-- <button (click)="addUser()">Add user</button> -->
+  <!-- <button [swal]="['Niveau 1','Niveau elementaire sweet alert','success']">Click me</button> -->
+</div>
